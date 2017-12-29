@@ -98,12 +98,12 @@ public class JobController {
 ```
 
 Let's try this new web controller with a PUT request in insomia :
-
-![insomnia Job Update](img/CountriesList.png)
+![insomniaJobUpdate](img/insomniaJobUpdate.png)
 
 
 And we can verify that the modification is in the database :
-[JobUpdateSQL]
+![insomniaJobUpdate](img/JobUpdateSQL.png)
+
 
 > If we try to modify a job witch does not exists we have an error instead of the http status 200 OK.
 
@@ -161,8 +161,7 @@ Then the only thing to do is to add the following line before every RequestMappi
 ```
 
 Witch gives for the moment :
-
-[SwaggerSample]
+![SwaggerSample](img/SwaggerSample.png)
 
 ### Question 7 :
 
@@ -191,8 +190,8 @@ public interface JobRepository extends CrudRepository<Job, String> {
 ```
 
 And here is what we get with min=9000 :
+![GetAbove9000](img/GetAbove9000.png)
 
-[GetAbove9000]
 
 ### Question 8 :
 
@@ -248,8 +247,7 @@ public class EmployeeController {
 ```
 
 And here is the result that we get :
-
-[EmployeeDTO]
+![EmployeeDTO](img/EmployeeDTO.png)
 
 ## Part IV - Web Interface
 
@@ -279,7 +277,7 @@ Once that we are in the html file, we can use Thymeleaf to display each element 
 ```
 
 Witch gives us for _/countries/list_ :
-[countriesList]
+![countriesList](img/countriesList.png)
 
 ### Question 10 :
 
@@ -306,8 +304,7 @@ document.getElementById("subButton").onclick = function() {
 ```
 
 Here is what we optain :
-
-[CountrySelection]
+![CountrySelection](img/CountrySelection.png)
 
 Now if we click on "suivant" we will pass the country ID in the GET parameters, to do so I had to use the **PathVariable** :
 ```Java
@@ -319,12 +316,10 @@ public String updateForm(@PathVariable("countryId") String countryId, Model mode
 ```
 
 Once the model was filed I could auto complete the form witch can now be modified :
-
-[UpdateForm]
+![UpdateForm](img/UpdateForm.png)
 
 This form will send a POST with every parameters that we will use in the repository to update the database :
-
-[updated]
+![ListCountryModified](img/ListCountryModified.png)
 
 > Note : I had to make the differnce on the same mapping on a GET and a POST using **@GetMapping** and **@PostMapping**.
 
