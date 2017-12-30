@@ -1,16 +1,18 @@
-# Report - Distributed Application
+# Report - Distributed Application <br> Hugo Gybels
+
+My name is Hugo Gybels and this is my report for the distributed Application course mini lab. Thank you for taking time to read it.
 
 ## Part 1 - Intro
 
-First thing was to create a project with every dependencies using the different tutorials we already made (JPA, MySQL, REST API, web services etc.).
+First thing was to **create a project** with every dependencies using the different tutorials we already made (JPA, MySQL, REST API, web services etc.).
 
 ## Part 2 - JPA data model
 
-I first created the JPA model using an already existing database. To do this I used the IDE's integrated tools witch are using a MySQL connection to create the corresponding entities in the application.
+I first created the JPA model using an already existing database. To do this I used the **IDE's integrated tools** witch are using a MySQL connection to create the corresponding entities in the application.
 
 ### Question 1 :
 
-We could expect that the JPA tools would create 7 PROJOs as we have 7 tables in the database, but 8 java classes were generated : one per table and one extra for job_history named ***jobHistoryPK.java***. Indeed PK stands for primary key and job history have two elements in its primary key witch explains that it needs an extra table to store the primary keys of job_histories so that a job_history occurrence have an end_date, a job_id and a department ID and simply a **job_historyPK as a primary key**.
+We could expect that the JPA tools would create 7 PROJOs as we have 7 tables in the database, yet 8 java classes were generated : one per table and one extra for job_history named ***jobHistoryPK.java***. Indeed PK stands for primary key and job history have two elements in its primary key witch explains that it needs an extra table to store the primary keys of job_histories so that a job_history occurrence have an end_date, a job_id and a department ID and simply a **job_historyPK as a primary key**.
 
 ### Question 2 :
 
@@ -31,11 +33,7 @@ Here is a quick view of the request using insomnia :
 ![findByCountryName](img/getByCountryName.png)
 
 
-Once I could execute a POST de get the countries list, I saw where the stack overflow was [todo]
-
-get employee get job history
-
-update -> generé foreign key = err
+Once I could execute a POST de get the countries list, I could also see a stack overflow due to a double inclusion beetween country witch have a region witch have a country list with regions etc. To ignore this fiels in the json returned we can use the annotation `@JsonIgnore` on.
 
 ### Question 3 :
 
@@ -58,10 +56,13 @@ If we change the first property from **none** to **update**, then the applicatio
 
 Indeed, id we look at the **employee table**, we can see that one of the employees have a departmentID witch is equal to zero **whereas zero do no correspond to any primary key in the department table**.
 
-Here is the error that we get :
-[TODO]
+Kimberly was the occurrence with a bad foreign key witch was making the application build fail.
+
+![wrongOccurence](img/wrongOccurence.png)
 
 To make things easier, I simply removed this occurrence.
+
+## Part III - Web Services
 
 ### Question 5 :
 
@@ -277,6 +278,7 @@ Once that we are in the html file, we can use Thymeleaf to display each element 
 ```
 
 Witch gives us for _/countries/list_ :
+
 ![countriesList](img/countriesList.png)
 
 ### Question 10 :
@@ -304,6 +306,7 @@ document.getElementById("subButton").onclick = function() {
 ```
 
 Here is what we optain :
+
 ![CountrySelection](img/CountrySelection.png)
 
 Now if we click on "suivant" we will pass the country ID in the GET parameters, to do so I had to use the **PathVariable** :
@@ -316,9 +319,11 @@ public String updateForm(@PathVariable("countryId") String countryId, Model mode
 ```
 
 Once the model was filed I could auto complete the form witch can now be modified :
+
 ![UpdateForm](img/UpdateForm.png)
 
 This form will send a POST with every parameters that we will use in the repository to update the database :
+
 ![ListCountryModified](img/ListCountryModified.png)
 
 > Note : I had to make the differnce on the same mapping on a GET and a POST using **@GetMapping** and **@PostMapping**.
@@ -334,6 +339,43 @@ public String updateCountrySubmit(@ModelAttribute Country country) {
 }
 ```
 
-### Question 10
+### Question 11
 
 To add some bootstrap and css, I had to create a folder **ressources/public/{css,js,img}**.
+
+The resources arborescence should look like this :
+
+* Ressources
+	* Public
+		* css
+		* img
+		* js
+	* Templates
+
+Adding some offline bootstrap we get something a bit more beautiful to look at :
+
+![BSCountryList](img/BSCountryList.png)
+
+![BSCountrySelect](img/BSCountrySlect.png)
+
+## Part V - Role based Access
+
+I unfortunately did not have time to do this last part completely, as good comprehension and troubleshooting of the first parts took quite a lot of time.
+
+### Question 12 & 13 :
+
+One very popular library using javascript to display graphs is **chartist** and I thing it would be a good idea to use it in our situation.
+
+### Question 14 :
+
+Same technologies as Question 9.
+
+### Question 15 :
+
+```
+<dependency>
+    <groupId>org.springframework.security</groupId>
+    <artifactId>spring-security-core</artifactId>
+    <version>5.0.0.RELEASE</version>
+</dependency>
+```
